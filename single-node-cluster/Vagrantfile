@@ -3,10 +3,13 @@
 
 Vagrant.configure("2") do |config|
   # for building we use the same files as for the regular run
+
+  PROJECT_PATH = "/home/vagrant/project"
+
   config.ssh.forward_agent = true
   config.ssh.insert_key = false
-  config.vm.synced_folder "../ansible-bdas", "/home/vagrant/base-playbook", :mount_options => ["dmode=700","fmode=600"]
-  config.vm.synced_folder ".", "/home/vagrant/deploy", :mount_options => ["dmode=700","fmode=600"]
+  config.vm.synced_folder "..", PROJECT_PATH, :mount_options => ["dmode=700","fmode=600"]
+  #config.vm.synced_folder ".", "/home/vagrant/deploy", :mount_options => ["dmode=700","fmode=600"]
 
   # TODO: need to add an ability to classify environment to run
   if Vagrant.has_plugin?("vagrant-proxyconf")
@@ -23,11 +26,11 @@ Vagrant.configure("2") do |config|
       c.vm.hostname = name
       c.vm.provision "shell" do |s|
         hosts_file = "echo '127.0.0.1 localhost'|tee /etc/hosts;echo '#{ip} #{name}'|tee --append /etc/hosts;"
-        s.inline = "#{hosts_file}#{dns_server}#{default_iface}apt-add-repository ppa:ansible/ansible -y; apt-get update -y; apt-get install ansible -y;"
+        s.inline = "#{hosts_file}apt-add-repository ppa:ansible/ansible -y; apt-get update -y; apt-get install ansible -y;"
         s.privileged = true
       end
 
-      c.vm.provision "shell", path: "../ansible-bdas/install-sshkey.sh"
+      c.vm.provision "shell", path: "../ansible-bdas/install-sshkey.sh", args: "#{PROJECT_PATH}/ansible-bdas"
 
       c.vm.provider :virtualbox do |vb|
       	vb.memory = 4096

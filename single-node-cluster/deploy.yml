@@ -1,5 +1,4 @@
 ---
-  - name: "Debug deploy"
-  - tasks:
-      - name: "Debug test"
-        debug: msg="Hello World!"
+  - include: ../ansible-bdas/ansible-bdas/test-external-include.yml #test_including=outside
+    vars_files:
+      - ../ansible-bdas/group_vars/all
