@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   end
 
   name = "controlmachine"
-  ip = "192.168.15.5"
+  ip = "192.168.92.1"
   # ubuntu
   config.vm.define name, primary: true do |c|
       c.vm.network "public_network", ip: ip, netmask: "255.255.255.0"

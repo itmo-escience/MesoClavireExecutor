@@ -1,4 +1,5 @@
 ---
-  - include: ../ansible-bdas/ansible-bdas/test-external-include.yml #test_including=outside
+  - include: ../ansible-bdas/ansible-bdas/mesos.yml
     vars_files:
       - ../ansible-bdas/group_vars/all
+      - ../ansible-bdas/group_vars/components.yml

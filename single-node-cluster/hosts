@@ -1,2 +1,5 @@
-[all]
+[mesos_masters]
+localhost
+
+[mesos_slaves]
 localhost
