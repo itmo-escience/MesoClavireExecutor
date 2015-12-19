@@ -1,0 +1,5 @@
+---
+  - name: "Debug deploy"
+  - tasks:
+      - name: "Debug test"
+        debug: msg="Hello World!"
