@@ -1,5 +1,7 @@
 .idea
+.vagrant
 *.iml
 *.iws
 *.ipr
+*.log
 target
